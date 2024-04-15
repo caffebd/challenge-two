@@ -7,9 +7,14 @@ var gravity = 900
 
 var direction := Vector2.ZERO
 
+var pushed = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	Signal.connect("push_up", self, "_push_up")
+	
+func _push_up():
+	pushed = true
 
 func _input(event):
 	
@@ -29,7 +34,11 @@ func _process(delta):
 	direction.y += gravity * delta
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor():
-			direction.y = jump_speed	
-
+			direction.y = jump_speed
+		
+	if pushed :
+		direction.y = jump_speed/2
+		pushed = false
+		
 	direction = move_and_slide(direction,  Vector2.UP)
 

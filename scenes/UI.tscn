@@ -16,10 +16,13 @@ rect_scale = Vector2( 2, 2 )
 text = "Score : "
 
 [node name="TimeLabel" type="Label" parent="."]
-visible = false
 margin_left = 850.0
 margin_top = 15.0
 margin_right = 894.0
 margin_bottom = 29.0
 rect_scale = Vector2( 2, 2 )
 text = "Time : "
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
